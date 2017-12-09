@@ -17,7 +17,11 @@
     "nodejs"
   ],
   "scripts": {
-    "test": "jest"
+    "build": "gulp build",
+    "test": "gulp unit",
+    "create-patch": "gulp bump-patch",
+    "create-minor": "gulp bump-minor",
+    "create-major": "gulp bump-major"
   },
   "dependencies": {
     "@types/express": "^4.0.39",
@@ -29,12 +33,23 @@
   "devDependencies": {
     "@types/jasmine": "^2.8.2",
     "@types/jest": "^21.1.8",
+    "gulp": "^3.9.1",
+    "gulp-bump": "^2.8.0",
+    "gulp-git": "^2.4.2",
+    "gulp-jest-cli": "github:halfmatthalfcat/gulp-jest-cli#0.0.4",
+    "gulp-tslint": "^8.1.2",
+    "gulp-typescript": "^3.2.3",
     "jasmine": "^2.8.0",
     "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
+    "jest-jasmine2": "^21.2.1",
     "jest-mock-express": "^0.1.1",
+    "pre-commit": "^1.2.2",
+    "semver": "^5.4.1",
     "ts-jest": "^21.2.4",
     "tslint": "^5.8.0",
-    "typescript": "^2.6.2"
+    "typescript": "^2.6.2",
+    "uncommitted": "^1.0.0"
   },
   "jest": {
     "transform": {
@@ -50,7 +65,10 @@
     ],
     "collectCoverage": true,
     "coverageDirectory": "coverage",
-    "coverageReporters": [ "text", "html" ],
+    "coverageReporters": [
+      "text",
+      "html"
+    ],
     "mapCoverage": true
   }
 }

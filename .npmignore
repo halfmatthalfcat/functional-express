@@ -1,0 +1,10 @@
+.idea
+node_modules
+__mocks__
+__tests__
+coverage
+util
+gulpfile.js
+package-lock.json
+tsconfig.json
+tslint.json
