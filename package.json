@@ -19,6 +19,7 @@
   "scripts": {
     "build": "gulp build",
     "test": "gulp unit",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "create-patch": "gulp bump-patch",
     "create-minor": "gulp bump-minor",
     "create-major": "gulp bump-major"
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@types/jasmine": "^2.8.2",
     "@types/jest": "^21.1.8",
+    "coveralls": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.8.0",
     "gulp-git": "^2.4.2",
@@ -67,7 +69,8 @@
     "coverageDirectory": "coverage",
     "coverageReporters": [
       "text",
-      "html"
+      "html",
+      "lcov"
     ],
     "mapCoverage": true
   }
