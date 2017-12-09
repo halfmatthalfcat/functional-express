@@ -33,7 +33,7 @@ export const async: <T>(promise: () => Promise<T>) => Complete =
     };
   };
 
-export type BodyFunc<T extends object> = (body: T) => AsyncNestedFunc | NestedFunc | Complete;
+export type BodyFunc<T> = (body: T) => AsyncNestedFunc | NestedFunc | Complete;
 
 /**
  * Extract a request body in it's raw form and return another extractor/completer
