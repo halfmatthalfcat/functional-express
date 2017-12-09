@@ -8,3 +8,4 @@ gulpfile.js
 package-lock.json
 tsconfig.json
 tslint.json
+.travis.yml
