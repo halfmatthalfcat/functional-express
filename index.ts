@@ -42,7 +42,7 @@ export const body: <T extends object>(classType: ClassType<T>, bodyFunc: BodyFun
     <T extends object>(classType: ClassType<T>, bodyFunc: BodyFunc<T>) => {
         return (req: Request, res: Response) => {
             return transformAndValidate(classType, req.body).then(
-                (bodyA: T) => bodyFunc(bodyA)(req, res) as NestedFunc,
+                (bodyA: T) => bodyFunc(bodyA)(req, res) as NestedFunc | AsyncNestedFunc | Complete,
                 (err: {}) => res.status(500).json(err),
             );
         };

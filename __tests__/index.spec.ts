@@ -4,7 +4,9 @@
 
 import {
   async,
-  AsyncNestedFunc, body, bodyRaw,
+  AsyncNestedFunc,
+  body,
+  bodyRaw,
   Complete,
   NestedFunc,
   Params,
@@ -12,6 +14,8 @@ import {
 } from "../index";
 
 import { Request } from 'express';
+
+import { DummyClassMock } from "../__mocks__/dummyClass.mock";
 
 // tslint:disable-next-line
 const response = require('jest-mock-express').response();
@@ -122,23 +126,80 @@ describe('functional-express', () => {
 
     it('should return a function', () => {
 
-      const paramFunc: AsyncNestedFunc | NestedFunc | Complete = bodyRaw(() => dummyFunc);
+      const bodyRawFunc: AsyncNestedFunc | NestedFunc | Complete = bodyRaw(() => dummyFunc);
 
-      expect(typeof paramFunc === 'function').toBeTruthy();
-      expect(paramFunc.length).toBe(2);
+      expect(typeof bodyRawFunc === 'function').toBeTruthy();
+      expect(bodyRawFunc.length).toBe(2);
 
     });
 
     it('should return a request body', (done: DoneFn) => {
 
       // tslint:disable-next-line no-any
-      const paramFunc: AsyncNestedFunc | NestedFunc | Complete = bodyRaw((b: any) => {
+      const bodyRawFunc: AsyncNestedFunc | NestedFunc | Complete = bodyRaw((b: any) => {
         expect(b).toBeDefined();
         done();
         return dummyFunc;
       });
 
-      paramFunc({ body: {} } as Request, response);
+      bodyRawFunc({ body: {} } as Request, response);
+
+    });
+
+  });
+
+  describe('body', () => {
+
+    it('should return a function', () => {
+
+      const bodyFunc: AsyncNestedFunc | NestedFunc | Complete = body(DummyClassMock, () => dummyFunc);
+
+      expect(typeof bodyFunc === 'function').toBeTruthy();
+      expect(bodyFunc.length).toBe(2);
+
+    });
+
+    it('should correctly validate the class when given valid input', (done: DoneFn) => {
+
+      const bodyFunc: AsyncNestedFunc | NestedFunc | Complete = body(DummyClassMock, (mock: DummyClassMock) => {
+        expect(mock).toBeDefined();
+        done();
+        return dummyFunc;
+      });
+
+      bodyFunc({ body: { a: 1, b: 'abc' }} as Request, response);
+
+    });
+
+    it('should correctly throw a 500 when there\'s invalid input', (done: DoneFn) => {
+
+      const bodyFunc: AsyncNestedFunc | NestedFunc | Complete = body(DummyClassMock, (_mock: DummyClassMock) => dummyFunc);
+
+      const spy: jasmine.Spy = spyOn(response, 'status').and.callFake(() => {
+        expect(spy.calls.first().args.length > 0).toBeTruthy();
+        expect(spy.calls.first().args[0]).toEqual(500);
+        done();
+        // Promise fails if mock response isn't returned
+        return response;
+      });
+
+      bodyFunc({ body: { someVal: 'abc' }} as Request, response);
+
+    });
+
+    it('should correctly emit error messages in the response body when there\'s invalid input', (done: DoneFn) => {
+
+      const bodyFunc: AsyncNestedFunc | NestedFunc | Complete = body(DummyClassMock, (_mock: DummyClassMock) => dummyFunc);
+
+      const spy: jasmine.Spy = spyOn(response, 'json').and.callFake(() => {
+        expect(spy.calls.first().args.length > 0).toBeTruthy();
+        expect(spy.calls.first().args[0]).toBeDefined();
+        done();
+        // Promise fails if mock response isn't returned
+        return response;
+      });
+
+      bodyFunc({ body: { someVal: 'abc' }} as Request, response);
 
     });
 

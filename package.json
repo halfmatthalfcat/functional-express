@@ -47,6 +47,10 @@
       "js",
       "jsx",
       "json"
-    ]
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": [ "text", "html" ],
+    "mapCoverage": true
   }
 }
