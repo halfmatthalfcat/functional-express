@@ -19,7 +19,7 @@ $ yarn add functional-express
 ## Usage
 
 ### Completers
-Completers fulfil the response of a request.
+Completers fulfill the response of a request.
 
 #### async
 The `async` completer takes a function which returns a `Promise`. The result of the `Promise`'s
