@@ -9,3 +9,7 @@ package-lock.json
 tsconfig.json
 tslint.json
 .travis.yml
+.coveralls.yml
+
+# Ignore typescript and only ship d.ts/.js
+index.ts

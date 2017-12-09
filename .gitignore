@@ -6,3 +6,7 @@ dist
 coverage
 
 package-lock.json
+
+# Ignore compiled assets
+index.d.ts
+index.js

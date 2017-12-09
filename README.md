@@ -1,6 +1,7 @@
 # functional-express
 [![Build Status](https://travis-ci.org/halfmatthalfcat/functional-express.svg?branch=master)](https://travis-ci.org/halfmatthalfcat/functional-express)
 [![Coverage Status](https://coveralls.io/repos/github/halfmatthalfcat/functional-express/badge.svg?branch=master)](https://coveralls.io/github/halfmatthalfcat/functional-express?branch=master)
+[![npm version](https://badge.fury.io/js/functional-express.svg)](https://badge.fury.io/js/functional-express)
 
 Functional helpers for dealing with Express.js routes. 
 Provides a cleaner API for dealing with extracting request values and completing responses.
